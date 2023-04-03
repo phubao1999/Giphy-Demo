@@ -1,0 +1,24 @@
+<ng-container *ngIf="data">
+  <div class="main">
+    <div class="main__gif">
+      <img
+        class="giphy-gif-img giphy-img-loaded"
+        [src]="data.images.downsized.url"
+        width="248"
+        height="248"
+        [alt]="data.title"
+        style="background: rgb(255, 243, 92)"
+      />
+      <div class="main__gif__info">
+        <div class="main__gif__info__action">
+          <span nz-icon nzType="link" nzTheme="outline"></span>
+          <span nz-icon nzType="heart" nzTheme="outline"></span>
+        </div>
+        <div class="main__gif__info__user">
+          <img width="40" [src]="data.user?.avatar_url" />
+          <p>{{ data.user?.display_name }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

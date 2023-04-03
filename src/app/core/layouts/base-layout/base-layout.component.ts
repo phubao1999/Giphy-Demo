@@ -15,6 +15,7 @@ export class BaseLayoutComponent {
         { name: 'Trending', link: '/' },
         { name: 'Random', link: '/random' },
         { name: 'Favorite', link: '/favorite' },
+        { name: 'Search', link: '/search' },
       ],
     },
   ];

@@ -1,1 +1,10 @@
-<p>giphy works!</p>
+<div class="layout">
+  <app-gif-card
+    *ngFor="let item of trendingGif$ | async"
+    [data]="item"
+  ></app-gif-card>
+</div>
+<div *ngIf="(trendingGif$ | async)?.length === 0" class="to-center">
+  <img width="200" src="../../../assets/imgs/crying-cowbow-emoji.gif" alt="" />
+  <h4>Oops! There’s nothing here.</h4>
+</div>
