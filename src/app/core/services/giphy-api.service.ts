@@ -13,6 +13,10 @@ export class GiphyApiService {
     IGif[]
   >([]);
   readonly trendingGif$ = this._trendingGif$.asObservable();
+  private readonly _searchGif$: BehaviorSubject<IGif[]> = new BehaviorSubject<
+    IGif[]
+  >([]);
+  readonly searchGif$ = this._searchGif$.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -24,12 +28,35 @@ export class GiphyApiService {
     this._trendingGif$.next(value);
   }
 
+  get searchGif() {
+    return this._searchGif$.getValue();
+  }
+
+  set searchGif(value: IGif[]) {
+    this._searchGif$.next(value);
+  }
+
   getTrendingGif(): Observable<IGif[]> {
     return this.http
       .get<IBaseGiphyResponse>(`${environment.giphyApi}/trending`)
       .pipe(
         map((res) => res.data),
         tap((res) => (this.trendingGif = res))
+      );
+  }
+
+  getSearchGif(q: string): Observable<any> {
+    return this.http
+      .get<IBaseGiphyResponse>(`${environment.giphyApi}/search`, {
+        params: {
+          offset: 0,
+          lang: 'en',
+          q,
+        },
+      })
+      .pipe(
+        map((res) => res.data),
+        tap((res) => (this.searchGif = res))
       );
   }
 }

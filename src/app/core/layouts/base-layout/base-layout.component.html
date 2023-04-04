@@ -23,7 +23,12 @@
         <ng-container *ngIf="item.subs && item.subs.length > 0">
           <li nz-submenu nzOpen [nzTitle]="item.name" [nzIcon]="item.icon">
             <ul>
-              <li *ngFor="let sub of item.subs" nz-menu-item nzMatchRouter>
+              <li
+                *ngFor="let sub of item.subs"
+                nz-menu-item
+                nzMatchRouter
+                (click)="navigate(sub.link)"
+              >
                 <a>{{ sub.name }}</a>
               </li>
             </ul>

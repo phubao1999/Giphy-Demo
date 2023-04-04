@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
+import { NgZorroModule } from './ng-zorro.module';
 
 registerLocaleData(en);
 
@@ -24,6 +25,7 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     CoreModule,
     SharedModule,
+    NgZorroModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],

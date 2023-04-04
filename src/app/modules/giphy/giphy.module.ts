@@ -1,11 +1,21 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GiphyRoutingModule } from './giphy-routing.module';
-import { GiphyComponent } from './giphy.component';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgZorroModule } from 'src/app/ng-zorro.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { GiphyRoutingModule } from './giphy-routing.module';
+import { SearchingComponent } from './searching/searching.component';
+import { TrendingComponent } from './trending/trending.component';
 
 @NgModule({
-  declarations: [GiphyComponent],
-  imports: [CommonModule, GiphyRoutingModule, SharedModule],
+  declarations: [SearchingComponent, TrendingComponent],
+  imports: [
+    CommonModule,
+    GiphyRoutingModule,
+    SharedModule,
+    NgZorroModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class GiphyModule {}

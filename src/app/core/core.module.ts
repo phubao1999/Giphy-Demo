@@ -1,12 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { NzNotificationModule } from 'ng-zorro-antd/notification';
-import { IconsProviderModule } from '../icons-provider.module';
+import { NgZorroModule } from '../ng-zorro.module';
 import {
   HttpErrorInterceptor,
   HttpParamsInterceptor,
@@ -20,10 +17,7 @@ import { BaseLayoutComponent } from './layouts/base-layout/base-layout.component
     RouterModule,
     BrowserModule,
     HttpClientModule,
-    NzLayoutModule,
-    NzMenuModule,
-    IconsProviderModule,
-    NzNotificationModule,
+    NgZorroModule,
   ],
   providers: [
     {

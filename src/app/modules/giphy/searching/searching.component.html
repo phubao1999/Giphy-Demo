@@ -1,0 +1,10 @@
+<nz-input-group>
+  <input
+    type="text"
+    nz-input
+    placeholder="input search text"
+    [formControl]="searching"
+  />
+</nz-input-group>
+<div class="mt-8"></div>
+<app-gif-list [data]="searchGifResults$"></app-gif-list>

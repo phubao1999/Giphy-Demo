@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-base-layout',
@@ -19,4 +20,10 @@ export class BaseLayoutComponent {
       ],
     },
   ];
+
+  constructor(private router: Router) {}
+
+  navigate(item: any): void {
+    this.router.navigate([`giphy/${item}`]);
+  }
 }
