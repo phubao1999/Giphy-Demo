@@ -13,3 +13,12 @@ export interface IBaseGiphyResponse {
     total_count: number;
   };
 }
+
+export interface IGiphyDetailsResponse {
+  data: IGif;
+  meta: {
+    msg: string;
+    response_id: string;
+    status: number;
+  };
+}

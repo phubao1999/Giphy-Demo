@@ -4,8 +4,8 @@
       <img
         class="giphy-gif-img giphy-img-loaded"
         [src]="data.images.downsized.url"
-        width="248"
-        height="248"
+        [width]="data.images.downsized.width"
+        [height]="data.images.downsized.height"
         [alt]="data.title"
         style="background: rgb(255, 243, 92)"
       />
@@ -14,11 +14,64 @@
           <span nz-icon nzType="link" nzTheme="outline"></span>
           <span nz-icon nzType="heart" nzTheme="outline"></span>
         </div>
+        <button
+          class="w-1/2 m-auto"
+          nz-button
+          nzType="primary"
+          (click)="showModal()"
+        >
+          Details
+        </button>
         <div class="main__gif__info__user">
-          <img width="40" [src]="data.user?.avatar_url" />
+          <img
+            width="40"
+            [src]="data.user?.avatar_url"
+            style="background: rgb(255, 243, 92)"
+          />
           <p>{{ data.user?.display_name }}</p>
         </div>
       </div>
     </div>
   </div>
 </ng-container>
+<nz-modal
+  [(nzVisible)]="isVisible"
+  [nzTitle]="modalTitle"
+  [nzContent]="modalContent"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="handleCancel()"
+>
+  <ng-template #modalTitle>{{ data.title }}</ng-template>
+
+  <ng-template #modalContent>
+    <div class="modal">
+      <div class="modal__action flex justify-end text-3xl mb-4">
+        <span class="mr-4" nz-icon nzType="link" nzTheme="outline"></span>
+        <span nz-icon nzType="heart" nzTheme="outline"></span>
+      </div>
+      <img
+        class="giphy-gif-img giphy-img-loaded w-full"
+        [src]="data.images.downsized_large.url"
+        height="data.images.downsized_large.height"
+        [alt]="data.title"
+        style="background: rgb(255, 243, 92)"
+      />
+      <div class="modal__author mt-4 flex items-center justify-between">
+        <img
+          width="60"
+          [src]="data.user?.avatar_url"
+          style="background: rgb(255, 243, 92)"
+        />
+        <p class="font-semibold">{{ data.user?.display_name }}</p>
+      </div>
+      <div class="flex items-center justify-between mt-4">
+        <p>Create At</p>
+        <p>{{ data.import_datetime | date : "medium" }}</p>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #modalFooter>
+    <button nz-button nzType="default" (click)="handleCancel()">Exit</button>
+  </ng-template>
+</nz-modal>

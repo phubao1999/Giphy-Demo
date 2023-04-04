@@ -1,6 +1,13 @@
 export interface IGif {
+  id: string;
   images: {
     downsized: {
+      height: string;
+      size: string;
+      url: string;
+      width: string;
+    };
+    downsized_large: {
       height: string;
       size: string;
       url: string;
@@ -21,4 +28,5 @@ export interface IGif {
     website_url: string;
   };
   username: string;
+  import_datetime: string;
 }

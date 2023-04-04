@@ -45,14 +45,19 @@
   </nz-sider>
   <nz-layout>
     <nz-header>
-      <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+      <div class="app-header flex justify-between">
+        <span class="header-trigger flex" (click)="isCollapsed = !isCollapsed">
           <span
             class="trigger"
             nz-icon
             [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
           ></span>
         </span>
+        <div class="mr-[24px]">
+          <button nz-button nzType="primary">
+            <span nz-icon nzType="upload" nzTheme="outline"></span>
+          </button>
+        </div>
       </div>
     </nz-header>
     <nz-content>

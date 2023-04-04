@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map, tap } from 'rxjs';
-import { IBaseGiphyResponse, IGif } from 'src/app/shared/model';
+import {
+  IBaseGiphyResponse,
+  IGif,
+  IGiphyDetailsResponse,
+} from 'src/app/shared/model';
 import { environment } from 'src/env/environment';
 
 @Injectable({
@@ -58,5 +62,11 @@ export class GiphyApiService {
         map((res) => res.data),
         tap((res) => (this.searchGif = res))
       );
+  }
+
+  getGifDetails(id: string): Observable<IGif> {
+    return this.http
+      .get<IGiphyDetailsResponse>(`${environment.giphyApi}/${id}`)
+      .pipe(map((res) => res.data));
   }
 }

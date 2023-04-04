@@ -8,4 +8,16 @@ import { IGif } from '../../model';
 })
 export class GifCardComponent {
   @Input() data!: IGif;
+  isVisible = false;
+  isLoading = false;
+
+  showModal(): void {
+    console.log(this.data);
+
+    this.isVisible = true;
+  }
+
+  handleCancel(): void {
+    this.isVisible = false;
+  }
 }
