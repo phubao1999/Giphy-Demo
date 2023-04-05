@@ -35,3 +35,10 @@ export interface IGifTag {
   name: string;
   analytics_response_payload: string;
 }
+
+export interface IUploadGif {
+  username?: string;
+  file?: string;
+  source_image_url?: string;
+  tags?: string;
+}

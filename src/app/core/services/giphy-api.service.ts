@@ -7,6 +7,8 @@ import {
   IGif,
   IGifTag,
   IGiphyDetailsResponse,
+  IMeta,
+  IUploadGif,
 } from 'src/app/shared/model';
 import { environment } from 'src/env/environment';
 
@@ -76,5 +78,9 @@ export class GiphyApiService {
     return this.http
       .get<IBaseResponse<IGifTag[]>>(`${environment.giphyTags}/related/${q}`)
       .pipe(map((res) => res.data));
+  }
+
+  uploadGif(body: IUploadGif): Observable<IMeta> {
+    return this.http.post<IMeta>(`${environment.giphyUpload}`, {});
   }
 }

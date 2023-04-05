@@ -26,7 +26,10 @@ export class HttpParamsInterceptor implements HttpInterceptor {
       });
       return next.handle(modifyReq);
     }
-    if (request.url.includes(environment.giphyTags)) {
+    if (
+      request.url.includes(environment.giphyTags) ||
+      request.url.includes(environment.giphyUpload)
+    ) {
       const modifyReq = request.clone({
         params: request.params.set('api_key', environment.giphyKey),
       });

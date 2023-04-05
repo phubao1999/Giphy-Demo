@@ -1,1 +1,41 @@
-<p>upload-gif works!</p>
+<div class="modal-header">
+  <h3 class="modal-title font-semibold" nz-typography>Upload Your Gif</h3>
+</div>
+<div class="modal-body mt-8">
+  <form nz-form [formGroup]="form">
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input a value">
+        <input nz-input placeholder="User Name" formControlName="userName" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input a value">
+        <input nz-input placeholder="Tag" formControlName="tag" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input a value">
+        <input nz-input placeholder="Gif File URL" formControlName="fileUrl" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input a value">
+        <input
+          type="file"
+          nz-input
+          placeholder="Gif File URL"
+          accept="image/gif"
+          formControlName="file"
+        />
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>
+<div class="modal-footer mt-16">
+  <div class="flex justify-end">
+    <button class="mr-4" nz-button nzType="default" (click)="close()">
+      Close
+    </button>
+    <button nz-button nzType="primary">Upload</button>
+  </div>
+</div>

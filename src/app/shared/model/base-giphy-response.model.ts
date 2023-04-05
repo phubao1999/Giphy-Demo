@@ -2,11 +2,7 @@ import { IGif } from './giphy.model';
 
 export interface IBaseGiphyResponse {
   data: IGif[];
-  meta: {
-    msg: string;
-    response_id: string;
-    status: number;
-  };
+  meta: IMeta;
   pagination: {
     count: number;
     offset: number;
@@ -16,18 +12,16 @@ export interface IBaseGiphyResponse {
 
 export interface IGiphyDetailsResponse {
   data: IGif;
-  meta: {
-    msg: string;
-    response_id: string;
-    status: number;
-  };
+  meta: IMeta;
 }
 
 export interface IBaseResponse<T> {
   data: T;
-  meta: {
-    msg: string;
-    response_id: string;
-    status: number;
-  };
+  meta: IMeta;
+}
+
+export interface IMeta {
+  msg: string;
+  response_id: string;
+  status: number;
 }

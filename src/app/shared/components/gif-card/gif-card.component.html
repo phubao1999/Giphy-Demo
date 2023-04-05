@@ -3,6 +3,7 @@
     <div class="main__gif">
       <img
         class="giphy-gif-img giphy-img-loaded"
+        loading="lazy"
         [src]="data.images.downsized.url"
         [width]="data.images.downsized.width"
         [height]="data.images.downsized.height"
@@ -30,6 +31,7 @@
         <div class="main__gif__info__user">
           <img
             width="40"
+            loading="lazy"
             [src]="data.user?.avatar_url"
             style="background: rgb(255, 243, 92)"
           />
@@ -68,6 +70,7 @@
       </div>
       <img
         class="giphy-gif-img giphy-img-loaded w-full"
+        loading="lazy"
         [src]="data.images.downsized_large.url"
         height="data.images.downsized_large.height"
         [alt]="data.title"
@@ -76,6 +79,7 @@
       <div class="modal__author mt-4 flex items-center justify-between">
         <img
           width="60"
+          loading="lazy"
           [src]="data.user?.avatar_url"
           style="background: rgb(255, 243, 92)"
         />
