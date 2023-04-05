@@ -14,7 +14,6 @@ export class BaseLayoutComponent {
       icon: 'file-gif',
       subs: [
         { name: 'Trending', link: '/' },
-        { name: 'Random', link: '/random' },
         { name: 'Favorite', link: '/favorite' },
         { name: 'Search', link: '/search' },
       ],

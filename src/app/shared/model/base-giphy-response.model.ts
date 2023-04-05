@@ -22,3 +22,12 @@ export interface IGiphyDetailsResponse {
     status: number;
   };
 }
+
+export interface IBaseResponse<T> {
+  data: T;
+  meta: {
+    msg: string;
+    response_id: string;
+    status: number;
+  };
+}

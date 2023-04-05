@@ -54,7 +54,13 @@
           ></span>
         </span>
         <div class="mr-[24px]">
-          <button nz-button nzType="primary">
+          <button
+            nz-button
+            nzType="primary"
+            nz-tooltip
+            [nzTooltipTitle]="titleTemplate"
+            [nzTooltipTitleContext]="{ $implicit: 'Icon' }"
+          >
             <span nz-icon nzType="upload" nzTheme="outline"></span>
           </button>
         </div>
@@ -67,3 +73,9 @@
     </nz-content>
   </nz-layout>
 </nz-layout>
+<ng-template #titleTemplate let-thing>
+  <div class="flex items-center">
+    <span nz-icon nzType="file"></span>
+    <span class="ml-2">Upload Gif</span>
+  </div>
+</ng-template>

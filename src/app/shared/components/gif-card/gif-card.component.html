@@ -11,7 +11,12 @@
       />
       <div class="main__gif__info">
         <div class="main__gif__info__action">
-          <span nz-icon nzType="link" nzTheme="outline"></span>
+          <span
+            nz-icon
+            nzType="link"
+            nzTheme="outline"
+            (click)="copyLink(data.images.downsized.url, templateNotify)"
+          ></span>
           <span nz-icon nzType="heart" nzTheme="outline"></span>
         </div>
         <button
@@ -46,8 +51,20 @@
   <ng-template #modalContent>
     <div class="modal">
       <div class="modal__action flex justify-end text-3xl mb-4">
-        <span class="mr-4" nz-icon nzType="link" nzTheme="outline"></span>
-        <span nz-icon nzType="heart" nzTheme="outline"></span>
+        <span
+          class="mr-4 cursor-pointer"
+          nz-icon
+          nzType="link"
+          nzTheme="outline"
+          (click)="copyLink(data.images.downsized.url, templateNotify)"
+        ></span>
+        <span
+          class="cursor-pointer"
+          nz-icon
+          nzType="heart"
+          nzTheme="outline"
+        ></span>
+        <!-- <span nz-icon nzType="heart" nzTheme="fill" style="color: red"></span> -->
       </div>
       <img
         class="giphy-gif-img giphy-img-loaded w-full"
@@ -75,3 +92,8 @@
     <button nz-button nzType="default" (click)="handleCancel()">Exit</button>
   </ng-template>
 </nz-modal>
+<ng-template #templateNotify>
+  <div class="ant-notification-notice-content">
+    <div class="ant-notification-notice-message">Link copied to clipboard!</div>
+  </div>
+</ng-template>

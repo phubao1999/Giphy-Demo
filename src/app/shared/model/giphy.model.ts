@@ -30,3 +30,8 @@ export interface IGif {
   username: string;
   import_datetime: string;
 }
+
+export interface IGifTag {
+  name: string;
+  analytics_response_payload: string;
+}

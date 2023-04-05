@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import {
   IBaseGiphyResponse,
+  IBaseResponse,
   IGif,
+  IGifTag,
   IGiphyDetailsResponse,
 } from 'src/app/shared/model';
 import { environment } from 'src/env/environment';
@@ -67,6 +69,12 @@ export class GiphyApiService {
   getGifDetails(id: string): Observable<IGif> {
     return this.http
       .get<IGiphyDetailsResponse>(`${environment.giphyApi}/${id}`)
+      .pipe(map((res) => res.data));
+  }
+
+  getTags(q: string): Observable<IGifTag[]> {
+    return this.http
+      .get<IBaseResponse<IGifTag[]>>(`${environment.giphyTags}/related/${q}`)
       .pipe(map((res) => res.data));
   }
 }

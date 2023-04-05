@@ -1,10 +1,34 @@
-<nz-input-group>
-  <input
-    type="text"
-    nz-input
-    placeholder="input search text"
-    [formControl]="searching"
-  />
-</nz-input-group>
+<form (ngSubmit)="search()">
+  <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+    <input
+      type="text"
+      nz-input
+      placeholder="input search text"
+      [formControl]="searching"
+      [nzAutocomplete]="auto"
+    />
+    <ng-template #suffixIconButton>
+      <button
+        *ngIf="searching.value"
+        nz-button
+        nzType="dashed"
+        (click)="searching.reset()"
+      >
+        X
+      </button>
+      <button #searchBtn nz-button nzType="primary" nzSearch (click)="search()">
+        <span nz-icon nzType="search"></span>
+      </button>
+    </ng-template>
+  </nz-input-group>
+</form>
 <div class="mt-8"></div>
 <app-gif-list [data]="searchGifResults$"></app-gif-list>
+<nz-autocomplete nzBackfill #auto>
+  <nz-auto-option
+    *ngFor="let tag of tags$ | async"
+    [nzValue]="tag.name"
+    (selectionChange)="fieldSelected($event, tag.name)"
+    >{{ tag.name }}</nz-auto-option
+  >
+</nz-autocomplete>

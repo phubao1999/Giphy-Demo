@@ -26,6 +26,12 @@ export class HttpParamsInterceptor implements HttpInterceptor {
       });
       return next.handle(modifyReq);
     }
+    if (request.url.includes(environment.giphyTags)) {
+      const modifyReq = request.clone({
+        params: request.params.set('api_key', environment.giphyKey),
+      });
+      return next.handle(modifyReq);
+    }
     return next.handle(request);
   }
 }
