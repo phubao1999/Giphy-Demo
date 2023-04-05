@@ -8,7 +8,7 @@
         [width]="data.images.downsized.width"
         [height]="data.images.downsized.height"
         [alt]="data.title"
-        style="background: rgb(255, 243, 92)"
+        [ngStyle]="{ 'background-color': randomColor }"
       />
       <div class="main__gif__info">
         <div class="main__gif__info__action">
@@ -33,7 +33,7 @@
             width="40"
             loading="lazy"
             [src]="data.user?.avatar_url"
-            style="background: rgb(255, 243, 92)"
+            [ngStyle]="{ 'background-color': randomColor }"
           />
           <p>{{ data.user?.display_name }}</p>
         </div>
@@ -75,14 +75,14 @@
         [width]="data.images.downsized_large.width"
         [height]="data.images.downsized_large.height"
         [alt]="data.title"
-        style="background: rgb(255, 243, 92)"
+        [ngStyle]="{ 'background-color': randomColor }"
       />
       <div class="modal__author mt-4 flex items-center justify-between">
         <img
           width="60"
           loading="lazy"
           [src]="data.user?.avatar_url"
-          style="background: rgb(255, 243, 92)"
+          [ngStyle]="{ 'background-color': randomColor }"
         />
         <p class="font-semibold">{{ data.user?.display_name }}</p>
       </div>
