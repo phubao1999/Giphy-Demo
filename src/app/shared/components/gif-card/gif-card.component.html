@@ -72,7 +72,8 @@
         class="giphy-gif-img giphy-img-loaded w-full"
         loading="lazy"
         [src]="data.images.downsized_large.url"
-        height="data.images.downsized_large.height"
+        [width]="data.images.downsized_large.width"
+        [height]="data.images.downsized_large.height"
         [alt]="data.title"
         style="background: rgb(255, 243, 92)"
       />

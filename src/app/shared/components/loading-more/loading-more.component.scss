@@ -1,0 +1,36 @@
+.loading {
+  text-align: center;
+  width: min-content;
+  position: fixed;
+  z-index: 11;
+  width: 100%;
+  bottom: 0;
+  .loading__bar {
+    position: relative;
+    height: 5px;
+    background-color: #1890ff;
+    border-radius: 1em;
+    overflow: hidden;
+    &::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: "";
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, #fff5, rgba(230, 230, 230, 0.891));
+      animation: loading-animation 1s infinite;
+      border-radius: 1em;
+    }
+  }
+}
+
+@keyframes loading-animation {
+  0% {
+    left: -50%;
+  }
+
+  100% {
+    left: 150%;
+  }
+}

@@ -25,6 +25,7 @@
 <div class="mt-8"></div>
 <app-gif-list [data]="searchGifResults$"></app-gif-list>
 <nz-autocomplete nzBackfill #auto>
+  <nz-auto-option class="loading-tag" *ngIf="searchTag"> <nz-spin nzSimple></nz-spin> </nz-auto-option>
   <nz-auto-option
     *ngFor="let tag of tags$ | async"
     [nzValue]="tag.name"

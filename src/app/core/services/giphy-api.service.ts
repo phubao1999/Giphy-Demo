@@ -1,6 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  finalize,
+  map,
+  switchMap,
+  tap,
+} from 'rxjs';
+import { apiConfig } from 'src/app/shared/constants';
 import {
   IBaseGiphyResponse,
   IBaseResponse,
@@ -11,6 +19,7 @@ import {
   IUploadGif,
 } from 'src/app/shared/model';
 import { environment } from 'src/env/environment';
+import { LoadingService } from './loading.service';
 
 @Injectable({
   providedIn: 'root',
@@ -21,12 +30,22 @@ export class GiphyApiService {
     IGif[]
   >([]);
   readonly trendingGif$ = this._trendingGif$.asObservable();
+  // searching gif
   private readonly _searchGif$: BehaviorSubject<IGif[]> = new BehaviorSubject<
     IGif[]
   >([]);
   readonly searchGif$ = this._searchGif$.asObservable();
+  // Scroll Load More Flag
+  private readonly _scrollFlg$: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(false);
+  readonly scrollFlg$ = this._scrollFlg$.asObservable();
 
-  constructor(private http: HttpClient) {}
+  private offset = 0;
+
+  constructor(
+    private http: HttpClient,
+    private loadingService: LoadingService
+  ) {}
 
   get trendingGif() {
     return this._trendingGif$.getValue();
@@ -44,16 +63,33 @@ export class GiphyApiService {
     this._searchGif$.next(value);
   }
 
+  get scrollFlg() {
+    return this._scrollFlg$.getValue();
+  }
+
+  set scrollFlg(value: boolean) {
+    this._scrollFlg$.next(value);
+  }
+
   getTrendingGif(): Observable<IGif[]> {
+    this.offset = 0;
+    this.loadingService.loading = true;
     return this.http
-      .get<IBaseGiphyResponse>(`${environment.giphyApi}/trending`)
+      .get<IBaseGiphyResponse>(`${environment.giphyApi}/trending`, {
+        params: {
+          offset: this.offset,
+        },
+      })
       .pipe(
+        finalize(() => (this.loadingService.loading = false)),
         map((res) => res.data),
         tap((res) => (this.trendingGif = res))
       );
   }
 
   getSearchGif(q: string): Observable<any> {
+    this.offset = 0;
+    this.loadingService.loading = true;
     return this.http
       .get<IBaseGiphyResponse>(`${environment.giphyApi}/search`, {
         params: {
@@ -63,6 +99,7 @@ export class GiphyApiService {
         },
       })
       .pipe(
+        finalize(() => (this.loadingService.loading = false)),
         map((res) => res.data),
         tap((res) => (this.searchGif = res))
       );
@@ -82,5 +119,40 @@ export class GiphyApiService {
 
   uploadGif(body: IUploadGif): Observable<IMeta> {
     return this.http.post<IMeta>(`${environment.giphyUpload}`, {});
+  }
+
+  loadMoreGif(): Observable<IGif[]> {
+    this.offset += apiConfig.offset;
+    this.loadingService.loadingMore = true;
+    return this.http
+      .get<IBaseGiphyResponse>(`${environment.giphyApi}/trending`, {
+        params: {
+          limit: apiConfig.limit,
+          offset: this.offset,
+        },
+      })
+      .pipe(
+        finalize(() => (this.loadingService.loadingMore = false)),
+        map((res) => res.data),
+        tap((res) => (this.trendingGif = [...this.trendingGif, ...res]))
+      );
+  }
+
+  loadMoreSearchGif(q: string): Observable<any> {
+    this.offset += apiConfig.offset;
+    this.loadingService.loadingMore = true;
+    return this.http
+      .get<IBaseGiphyResponse>(`${environment.giphyApi}/search`, {
+        params: {
+          offset: this.offset,
+          lang: 'en',
+          q,
+        },
+      })
+      .pipe(
+        finalize(() => (this.loadingService.loadingMore = false)),
+        map((res) => res.data),
+        tap((res) => (this.searchGif = [...this.searchGif, ...res]))
+      );
   }
 }

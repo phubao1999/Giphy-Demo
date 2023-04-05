@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationComponent } from 'ng-zorro-antd/notification';
 import { UploadGifComponent } from 'src/app/shared/components';
+import { GiphyApiService } from '../../services';
 
 @Component({
   selector: 'app-base-layout',
@@ -23,7 +24,11 @@ export class BaseLayoutComponent implements OnInit {
     },
   ];
 
-  constructor(private router: Router, private modal: NzModalService) {}
+  constructor(
+    private router: Router,
+    private modal: NzModalService,
+    private giphy: GiphyApiService
+  ) {}
 
   ngOnInit(): void {
     // this.modal.create({
@@ -34,5 +39,16 @@ export class BaseLayoutComponent implements OnInit {
 
   navigate(item: any): void {
     this.router.navigate([`giphy/${item}`]);
+  }
+
+  onScroll(event: any) {
+    if (
+      event.target.offsetHeight + event.target.scrollTop >=
+      event.target.scrollHeight
+    ) {
+      this.giphy.scrollFlg = true;
+    } else {
+      this.giphy.scrollFlg = false;
+    }
   }
 }

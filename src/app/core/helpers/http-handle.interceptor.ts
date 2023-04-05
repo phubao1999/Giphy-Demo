@@ -8,7 +8,7 @@ import {
 import { Injectable } from '@angular/core';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Observable, catchError, throwError } from 'rxjs';
-import { RatingEnum } from 'src/app/shared/constants';
+import { RatingEnum, apiConfig } from 'src/app/shared/constants';
 import { environment } from 'src/env/environment';
 
 @Injectable()
@@ -21,7 +21,7 @@ export class HttpParamsInterceptor implements HttpInterceptor {
       const modifyReq = request.clone({
         params: request.params
           .set('api_key', environment.giphyKey)
-          .set('limit', 10)
+          .set('limit', apiConfig.limit)
           .set('rating', RatingEnum.LV1),
       });
       return next.handle(modifyReq);

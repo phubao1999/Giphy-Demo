@@ -1,0 +1,6 @@
+<div *ngIf="loading$ | async" class="loading-layout">
+  <nz-spin nzSimple [nzIndicator]="indicatorTemplate"></nz-spin>
+  <ng-template #indicatorTemplate
+    ><span nz-icon nzType="loading"></span
+  ></ng-template>
+</div>

@@ -11,6 +11,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { IconsProviderModule } from './icons-provider.module';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 @NgModule({
   exports: [
@@ -25,6 +26,7 @@ import { IconsProviderModule } from './icons-provider.module';
     NzToolTipModule,
     NzAutocompleteModule,
     NzFormModule,
+    NzSpinModule
   ],
   providers: [NzMessageService]
 })

@@ -67,7 +67,7 @@
       </div>
     </nz-header>
     <nz-content>
-      <div class="inner-content">
+      <div class="inner-content" (scroll)="onScroll($event)">
         <router-outlet></router-outlet>
       </div>
     </nz-content>

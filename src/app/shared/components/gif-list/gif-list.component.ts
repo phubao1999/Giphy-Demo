@@ -1,6 +1,6 @@
-import { IGif } from 'src/app/shared/model';
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IGif } from 'src/app/shared/model';
 
 @Component({
   selector: 'app-gif-list',
