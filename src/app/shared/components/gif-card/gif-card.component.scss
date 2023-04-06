@@ -56,3 +56,11 @@
     }
   }
 }
+
+.icon {
+  transition: all ease 0.8s;
+
+  &:hover {
+    font-size: 2rem !important;
+  }
+}

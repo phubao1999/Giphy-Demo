@@ -26,8 +26,8 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
     NzToolTipModule,
     NzAutocompleteModule,
     NzFormModule,
-    NzSpinModule
+    NzSpinModule,
   ],
-  providers: [NzMessageService]
+  providers: [NzMessageService],
 })
 export class NgZorroModule {}

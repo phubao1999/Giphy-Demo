@@ -13,12 +13,38 @@
       <div class="main__gif__info">
         <div class="main__gif__info__action">
           <span
+            class="cursor-pointer"
             nz-icon
             nzType="link"
             nzTheme="outline"
+            nzTooltipTitle="Copy link for this Gif"
+            nzTooltipPlacement="topLeft"
+            nz-tooltip
             (click)="copyLink(data.images.downsized.url, templateNotify)"
           ></span>
-          <span nz-icon nzType="heart" nzTheme="outline"></span>
+          <span
+            *ngIf="!data.isFavorite"
+            class="icon"
+            nz-icon
+            nz-tooltip
+            nzType="heart"
+            nzTheme="outline"
+            nzTooltipTitle="Love it? click it to add to your favorite list"
+            nzTooltipPlacement="topLeft"
+            (click)="addToFavorite(data, templateFavorite)"
+          ></span>
+          <span
+            *ngIf="data.isFavorite"
+            class="icon"
+            nz-icon
+            nz-tooltip
+            nzType="heart"
+            nzTheme="twotone"
+            nzTooltipTitle="Your favorite gif. Want to remove it? Click it"
+            nzTooltipPlacement="topLeft"
+            [nzTwotoneColor]="'#eb2f96'"
+            (click)="addToFavorite(data, templateFavorite)"
+          ></span>
         </div>
         <button
           class="w-1/2 m-auto"
@@ -58,15 +84,34 @@
           nz-icon
           nzType="link"
           nzTheme="outline"
+          nzTooltipTitle="Copy link for this Gif"
+          nzTooltipPlacement="topLeft"
+          nz-tooltip
           (click)="copyLink(data.images.downsized.url, templateNotify)"
         ></span>
         <span
-          class="cursor-pointer"
+          *ngIf="!data.isFavorite"
+          class="icon"
           nz-icon
+          nz-tooltip
           nzType="heart"
           nzTheme="outline"
+          nzTooltipTitle="Love it? click it to add to your favorite list"
+          nzTooltipPlacement="topLeft"
+          (click)="addToFavorite(data, templateFavorite)"
         ></span>
-        <!-- <span nz-icon nzType="heart" nzTheme="fill" style="color: red"></span> -->
+        <span
+          *ngIf="data.isFavorite"
+          class="icon"
+          nz-icon
+          nz-tooltip
+          nzType="heart"
+          nzTheme="twotone"
+          nzTooltipTitle="Your favorite gif. Want to remove it? Click it"
+          nzTooltipPlacement="topLeft"
+          [nzTwotoneColor]="'#eb2f96'"
+          (click)="addToFavorite(data, templateFavorite)"
+        ></span>
       </div>
       <img
         class="giphy-gif-img giphy-img-loaded w-full"
@@ -100,5 +145,16 @@
 <ng-template #templateNotify>
   <div class="ant-notification-notice-content">
     <div class="ant-notification-notice-message">Link copied to clipboard!</div>
+  </div>
+</ng-template>
+<ng-template #templateFavorite>
+  <div class="ant-notification-notice-content">
+    <div class="ant-notification-notice-message">
+      {{
+        data.isFavorite
+          ? "This Gif Have Been Added To Your List"
+          : "This Gif Have Been Removed From Your List"
+      }}
+    </div>
   </div>
 </ng-template>

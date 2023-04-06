@@ -6,9 +6,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { GiphyRoutingModule } from './giphy-routing.module';
 import { SearchingComponent } from './searching/searching.component';
 import { TrendingComponent } from './trending/trending.component';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 @NgModule({
-  declarations: [SearchingComponent, TrendingComponent],
+  declarations: [SearchingComponent, TrendingComponent, FavoritesComponent],
   imports: [
     CommonModule,
     GiphyRoutingModule,

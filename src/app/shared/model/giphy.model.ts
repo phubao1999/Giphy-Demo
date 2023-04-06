@@ -29,6 +29,7 @@ export interface IGif {
   };
   username: string;
   import_datetime: string;
+  isFavorite?: boolean;
 }
 
 export interface IGifTag {

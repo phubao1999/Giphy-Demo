@@ -6,3 +6,10 @@
   <img width="200" src="../../../assets/imgs/crying-cowbow-emoji.gif" alt="" />
   <h4>Oops! There’s nothing here.</h4>
 </div>
+
+<div *ngIf="!(data | async)" class="to-center">
+  <img width="200" src="../../../assets/imgs/crying-cowbow-emoji.gif" alt="" />
+  <h4>
+    Oops! There’s nothing here. Please look around and add to your favorite list
+  </h4>
+</div>

@@ -1,11 +1,9 @@
-import {
-  Component,
-  Input,
-  OnInit,
-  TemplateRef
-} from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { IGif } from '../../model';
+import { LocalStorageService } from 'src/app/core/services';
+import { Action, LocalStorage } from '../../constants';
+import { set } from 'lodash';
 
 @Component({
   selector: 'app-gif-card',
@@ -20,7 +18,9 @@ export class GifCardComponent implements OnInit {
 
   constructor(
     private notify: NzNotificationService,
+    private localStorage: LocalStorageService
   ) {}
+
   ngOnInit(): void {
     this.randomColor = this.randomRgba();
   }
@@ -54,5 +54,16 @@ export class GifCardComponent implements OnInit {
       ')'
     );
   }
+
+  addToFavorite($event: IGif, template: TemplateRef<{}>): void {
+    if (!$event.isFavorite) {
+      set($event, 'isFavorite', true);
+      this.notify.template(template);
+      this.localStorage.updateFavoriteList($event, Action.add);
+    } else {
+      [set($event, 'isFavorite', false)];
+      this.notify.template(template);
+      this.localStorage.updateFavoriteList($event, Action.remove);
+    }
+  }
 }
-// [ngStyle]="{background: rgb(255, 243, 92)}"
