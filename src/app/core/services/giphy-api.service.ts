@@ -1,14 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  BehaviorSubject,
-  Observable,
-  finalize,
-  map,
-  switchMap,
-  tap,
-} from 'rxjs';
+import { BehaviorSubject, Observable, finalize, map, tap } from 'rxjs';
 import { apiConfig } from 'src/app/shared/constants';
+import * as _ from 'lodash';
 import {
   IBaseGiphyResponse,
   IBaseResponse,
@@ -20,6 +14,7 @@ import {
 } from 'src/app/shared/model';
 import { environment } from 'src/env/environment';
 import { LoadingService } from './loading.service';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -44,7 +39,8 @@ export class GiphyApiService {
 
   constructor(
     private http: HttpClient,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private localStorageService: LocalStorageService
   ) {}
 
   get trendingGif() {
@@ -71,6 +67,10 @@ export class GiphyApiService {
     this._scrollFlg$.next(value);
   }
 
+  get listFavorites(): string[] {
+    return _.map(this.localStorageService.favorites, (item) => item.id);
+  }
+
   getTrendingGif(): Observable<IGif[]> {
     this.offset = 0;
     this.loadingService.loading = true;
@@ -82,7 +82,7 @@ export class GiphyApiService {
       })
       .pipe(
         finalize(() => (this.loadingService.loading = false)),
-        map((res) => res.data),
+        map((res) => this.mapGif(res)),
         tap((res) => (this.trendingGif = res))
       );
   }
@@ -100,7 +100,7 @@ export class GiphyApiService {
       })
       .pipe(
         finalize(() => (this.loadingService.loading = false)),
-        map((res) => res.data),
+        map((res) => this.mapGif(res)),
         tap((res) => (this.searchGif = res))
       );
   }
@@ -118,7 +118,10 @@ export class GiphyApiService {
   }
 
   uploadGif(body: IUploadGif): Observable<IMeta> {
-    return this.http.post<IMeta>(`${environment.giphyUpload}`, {});
+    let params = this.buildParamsUploadGif(body);
+    return this.http.post<IMeta>(`${environment.giphyUpload}`, null, {
+      params: params,
+    });
   }
 
   loadMoreGif(): Observable<IGif[]> {
@@ -133,7 +136,7 @@ export class GiphyApiService {
       })
       .pipe(
         finalize(() => (this.loadingService.loadingMore = false)),
-        map((res) => res.data),
+        map((res) => this.mapGif(res)),
         tap((res) => (this.trendingGif = [...this.trendingGif, ...res]))
       );
   }
@@ -151,8 +154,36 @@ export class GiphyApiService {
       })
       .pipe(
         finalize(() => (this.loadingService.loadingMore = false)),
-        map((res) => res.data),
+        map((res) => this.mapGif(res)),
         tap((res) => (this.searchGif = [...this.searchGif, ...res]))
       );
+  }
+
+  private mapGif(data: IBaseGiphyResponse): IGif[] {
+    return data.data.map((item) => {
+      if (this.listFavorites.includes(item.id)) {
+        item.isFavorite = true;
+      }
+
+      return item;
+    });
+  }
+
+  private buildParamsUploadGif(body: IUploadGif): HttpParams {
+    let params = new HttpParams();
+    if (!_.isNil(body.username)) {
+      params = params.append('username', body.username);
+    }
+    if (!_.isNil(body.tags)) {
+      params = params.append('tags', body.tags);
+    }
+    if (!_.isNil(body.source_image_url)) {
+      params = params.append('source_image_url', body.source_image_url);
+    }
+    if (!_.isNil(body.file)) {
+      params = params.append('file', body.file);
+    }
+
+    return params;
   }
 }

@@ -14,18 +14,19 @@
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-control nzErrorTip="Please input a value">
+      <nz-form-control nzErrorTip="Please input your gif file url">
         <input nz-input placeholder="Gif File URL" formControlName="fileUrl" />
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-control nzErrorTip="Please input a value">
+      <nz-form-control nzErrorTip="Please select gif file">
         <input
           type="file"
           nz-input
           placeholder="Gif File URL"
           accept="image/gif"
           formControlName="file"
+          (change)="convertFile($event)"
         />
       </nz-form-control>
     </nz-form-item>
@@ -36,6 +37,6 @@
     <button class="mr-4" nz-button nzType="default" (click)="close()">
       Close
     </button>
-    <button nz-button nzType="primary">Upload</button>
+    <button nz-button nzType="primary" (click)="uploadFile()">Upload</button>
   </div>
 </div>

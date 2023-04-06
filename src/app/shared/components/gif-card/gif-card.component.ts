@@ -58,12 +58,11 @@ export class GifCardComponent implements OnInit {
   addToFavorite($event: IGif, template: TemplateRef<{}>): void {
     if (!$event.isFavorite) {
       set($event, 'isFavorite', true);
-      this.notify.template(template);
       this.localStorage.updateFavoriteList($event, Action.add);
     } else {
       [set($event, 'isFavorite', false)];
-      this.notify.template(template);
       this.localStorage.updateFavoriteList($event, Action.remove);
     }
+    this.notify.template(template);
   }
 }

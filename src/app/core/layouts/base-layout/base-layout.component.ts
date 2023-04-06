@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { NzNotificationComponent } from 'ng-zorro-antd/notification';
 import { UploadGifComponent } from 'src/app/shared/components';
 import { GiphyApiService } from '../../services';
 
@@ -10,7 +9,7 @@ import { GiphyApiService } from '../../services';
   templateUrl: './base-layout.component.html',
   styleUrls: ['./base-layout.component.scss'],
 })
-export class BaseLayoutComponent implements OnInit {
+export class BaseLayoutComponent  {
   isCollapsed = false;
   menuItems = [
     {
@@ -30,13 +29,6 @@ export class BaseLayoutComponent implements OnInit {
     private giphy: GiphyApiService
   ) {}
 
-  ngOnInit(): void {
-    // this.modal.create({
-    //   nzContent: UploadGifComponent,
-    //   nzFooter: null,
-    // });
-  }
-
   navigate(item: any): void {
     this.router.navigate([`giphy/${item}`]);
   }
@@ -50,5 +42,12 @@ export class BaseLayoutComponent implements OnInit {
     } else {
       this.giphy.scrollFlg = false;
     }
+  }
+
+  uploadGif(): void {
+    this.modal.create({
+      nzContent: UploadGifComponent,
+      nzFooter: null,
+    });
   }
 }
