@@ -1,16 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 
-import { HttpHandleInterceptor } from './http-handle.interceptor';
+import { HttpParamsInterceptor } from './http-handle.interceptor';
 
 describe('HttpHandleInterceptor', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    providers: [
-      HttpHandleInterceptor
-      ]
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      providers: [HttpParamsInterceptor],
+    })
+  );
 
   it('should be created', () => {
-    const interceptor: HttpHandleInterceptor = TestBed.inject(HttpHandleInterceptor);
+    const interceptor: HttpParamsInterceptor = TestBed.inject(
+      HttpParamsInterceptor
+    );
     expect(interceptor).toBeTruthy();
   });
 });

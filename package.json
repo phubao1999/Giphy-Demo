@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test --code-coverage --source-map=false --browsers=ChromeHeadlessNoSandbox --watch=false",
+    "coverage": "npm test --no-watch --code-coverage --source-map=false --watch=false --reporters=progress,coverage"
   },
   "private": true,
   "dependencies": {
@@ -37,6 +38,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "karma-spec-reporter": "^0.0.32",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.3.1",
     "typescript": "~4.9.4"
