@@ -9,7 +9,7 @@ import {
   distinctUntilChanged,
   of,
   switchMap,
-  takeUntil
+  takeUntil,
 } from 'rxjs';
 import { GiphyApiService } from 'src/app/core/services';
 import { IGif, IGifTag } from 'src/app/shared/model';
@@ -17,7 +17,6 @@ import { IGif, IGifTag } from 'src/app/shared/model';
 @Component({
   selector: 'app-searching',
   templateUrl: './searching.component.html',
-  styleUrls: ['./searching.component.scss'],
 })
 export class SearchingComponent implements OnInit, OnDestroy {
   searching = new FormControl('');

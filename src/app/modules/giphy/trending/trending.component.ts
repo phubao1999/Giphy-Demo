@@ -6,7 +6,6 @@ import { IGif } from 'src/app/shared/model';
 @Component({
   selector: 'app-trending',
   templateUrl: './trending.component.html',
-  styleUrls: ['./trending.component.scss'],
 })
 export class TrendingComponent implements OnInit {
   trendingGif$!: Observable<IGif[]>;
