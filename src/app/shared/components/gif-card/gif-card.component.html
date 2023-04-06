@@ -1,5 +1,5 @@
 <ng-container *ngIf="data">
-  <div class="main">
+  <div [ngClass]="{ remove: isFavoritePage && !data.isFavorite }" class="main">
     <div class="main__gif">
       <img
         class="giphy-gif-img giphy-img-loaded"
@@ -43,7 +43,7 @@
             nzTooltipTitle="Your favorite gif. Want to remove it? Click it"
             nzTooltipPlacement="topLeft"
             [nzTwotoneColor]="'#eb2f96'"
-            (click)="addToFavorite(data, templateFavorite)"
+            (click)="showConfirmModal()"
           ></span>
         </div>
         <button
@@ -110,7 +110,7 @@
           nzTooltipTitle="Your favorite gif. Want to remove it? Click it"
           nzTooltipPlacement="topLeft"
           [nzTwotoneColor]="'#eb2f96'"
-          (click)="addToFavorite(data, templateFavorite)"
+          (click)="showConfirmModal()"
         ></span>
       </div>
       <img
@@ -158,3 +158,14 @@
     </div>
   </div>
 </ng-template>
+<nz-modal
+  [(nzVisible)]="isConfirmVisible"
+  nzTitle="The first Modal"
+  (nzOnCancel)="handleConfirmCancel()"
+  (nzOnOk)="handleOk(data, templateFavorite)"
+>
+  <ng-container *nzModalContent>
+    <p>This action will remove this gif from your favorite list</p>
+    <p>Are you sure want to continue ?</p>
+  </ng-container>
+</nz-modal>

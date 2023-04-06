@@ -9,4 +9,5 @@ import { IGif } from 'src/app/shared/model';
 })
 export class GifListComponent {
   @Input() data!: Observable<IGif[]>;
+  @Input() isFavoritePage: boolean = false;
 }

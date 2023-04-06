@@ -12,7 +12,9 @@ import { set } from 'lodash';
 })
 export class GifCardComponent implements OnInit {
   @Input() data!: IGif;
+  @Input() isFavoritePage: boolean = false;
   isVisible = false;
+  isConfirmVisible = false;
   isLoading = false;
   randomColor!: string;
 
@@ -29,8 +31,23 @@ export class GifCardComponent implements OnInit {
     this.isVisible = true;
   }
 
+  showConfirmModal(): void {
+    this.isConfirmVisible = true;
+  }
+
   handleCancel(): void {
     this.isVisible = false;
+  }
+
+  handleConfirmCancel(): void {
+    this.isConfirmVisible = false;
+  }
+
+  handleOk($event: IGif, template: TemplateRef<{}>): void {
+    this.isConfirmVisible = false;
+    setTimeout(() => {
+      this.addToFavorite($event, template);
+    }, 1000);
   }
 
   copyLink(url: string, template: TemplateRef<{}>): void {

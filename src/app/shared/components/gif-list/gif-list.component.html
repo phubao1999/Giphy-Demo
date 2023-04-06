@@ -1,5 +1,9 @@
 <div class="mosaic-layout">
-  <app-gif-card *ngFor="let item of data | async" [data]="item"></app-gif-card>
+  <app-gif-card
+    *ngFor="let item of data | async"
+    [data]="item"
+    [isFavoritePage]="isFavoritePage"
+  ></app-gif-card>
 </div>
 <!-- <nz-spin nzSimple></nz-spin> -->
 <div *ngIf="(data | async)?.length === 0" class="to-center">

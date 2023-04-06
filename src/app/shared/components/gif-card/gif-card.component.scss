@@ -1,6 +1,10 @@
 .main {
+  transition: all ease 1s;
   display: inline-block;
   cursor: pointer;
+  &.remove {
+    transform: translateX(100vw);
+  }
   &__gif {
     position: relative;
     overflow: hidden;
