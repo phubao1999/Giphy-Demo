@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { BaseLayoutComponent } from './core/layouts/base-layout/base-layout.component';
 import { PageNotFoundComponent } from './shared/pages';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/giphy' },
   {
     path: 'giphy',

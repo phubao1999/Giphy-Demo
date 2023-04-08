@@ -1,34 +1,18 @@
 <nz-layout class="app-layout">
-  <nz-sider
-    class="menu-sidebar"
-    nzCollapsible
-    nzWidth="256px"
-    nzBreakpoint="md"
-    [(nzCollapsed)]="isCollapsed"
-    [nzTrigger]="null"
-  >
+  <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null">
     <div class="sidebar-logo">
       <a>
         <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo" />
         <h1>Giphy Demo</h1>
       </a>
     </div>
-    <ul
-      nz-menu
-      nzTheme="dark"
-      nzMode="inline"
-      [nzInlineCollapsed]="isCollapsed"
-    >
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       <ng-container *ngFor="let item of menuItems">
         <ng-container *ngIf="item.subs && item.subs.length > 0">
           <li nz-submenu nzOpen [nzTitle]="item.name" [nzIcon]="item.icon">
             <ul>
-              <li
-                *ngFor="let sub of item.subs"
-                nz-menu-item
-                nzMatchRouter
-                (click)="navigate(sub.link)"
-              >
+              <li class="subs" *ngFor="let sub of item.subs" nz-menu-item nzMatchRouter (click)="navigate(sub.link)">
                 <a>{{ sub.name }}</a>
               </li>
             </ul>
@@ -47,20 +31,11 @@
     <nz-header>
       <div class="app-header flex justify-between">
         <span class="header-trigger flex" (click)="isCollapsed = !isCollapsed">
-          <span
-            class="trigger"
-            nz-icon
-            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-          ></span>
+          <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></span>
         </span>
         <div class="mr-[24px]">
-          <button
-            nz-button
-            nzType="primary"
-            nz-tooltip
-            [nzTooltipTitle]="titleTemplate"
-            [nzTooltipTitleContext]="{ $implicit: 'Icon' }"
-          >
+          <button nz-button nzType="primary" nz-tooltip [nzTooltipTitle]="titleTemplate"
+            [nzTooltipTitleContext]="{ $implicit: 'Icon' }">
             <span nz-icon nzType="upload" nzTheme="outline" (click)="uploadGif()"></span>
           </button>
         </div>
