@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { isEmpty, isNil } from 'lodash';
-import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalRef } from 'ng-zorro-antd/modal';
-import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { take } from 'rxjs';
 import { GiphyApiService } from 'src/app/core/services';
 import { IUploadGif } from 'src/app/shared/model';
@@ -11,7 +9,6 @@ import { IUploadGif } from 'src/app/shared/model';
 @Component({
   selector: 'app-upload-gif',
   templateUrl: './upload-gif.component.html',
-  styleUrls: ['./upload-gif.component.scss'],
 })
 export class UploadGifComponent implements OnInit {
   form!: FormGroup;
