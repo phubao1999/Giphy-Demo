@@ -9,7 +9,7 @@ import { NgZorroModule } from 'src/app/ng-zorro.module';
 import { GiphyApiService } from '../../services';
 import { BaseLayoutComponent } from './base-layout.component';
 
-fdescribe('BaseLayoutComponent', () => {
+describe('BaseLayoutComponent', () => {
   let component: BaseLayoutComponent;
   let fixture: ComponentFixture<BaseLayoutComponent>;
   let locationRef: Location
