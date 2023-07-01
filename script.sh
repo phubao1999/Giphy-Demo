@@ -4,9 +4,16 @@ set -e
 echo "Enter Your Git Branch You Want To Deploy"
 read branch
 
+cd /path/to/fe_directory
 echo "Git Step Processing ...."
-git checkout $branch
-git pull origin
+if [ -z "$branch" ]; then
+    echo "\$Branch is NULL"
+    git pull origin
+else
+    git fetch
+    git checkout $branch
+    git pull origin
+fi
 
 echo "Build Step"
 npm install --legacy-peer-deps
